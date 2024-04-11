@@ -1,4 +1,4 @@
-// #1
+// #1 Create class key
 class Key {
     private signature: number;
 
@@ -11,7 +11,7 @@ class Key {
     }
 }
 
-// #2
+// #2 Create class Person
 class Person {
     private key: Key;
 
@@ -19,12 +19,12 @@ class Person {
         this.key = key;
     }
 
-    getKey(): Key {
+    public getKey(): Key {
         return this.key;
     }
 }
 
-// #3
+// #3 Create abstract class House
 abstract class House {
     protected door: boolean;
     protected key: Key;
@@ -36,19 +36,19 @@ abstract class House {
         this.tenants = [];
     }
 
-    comeIn(person: Person): void {
+    public comeIn(person: Person): void {
         if (this.door) {
             this.tenants.push(person);
-            console.log('A man walks into a house');  
+            alert('A man walks into a house');  
         } else {
-            console.log('The door is closed');
+            alert('The door is closed');
             
         }
     }
     abstract openDoor(key: Key): void;   
 }
 
-// #4 
+// #4 Create class MyHouse
 class MyHouse extends House {
     constructor(key: Key) {
         super(key);
@@ -57,19 +57,28 @@ class MyHouse extends House {
     openDoor(key: Key): void {
         if (key.getSignature() === this.key.getSignature()) {
             this.door = true;
-            console.log('The door is open. Welcome!');
+            alert('The door is open. Welcome!');
         } else {
-            console.log('Oops, incorrect key...');
+            alert('Oops, incorrect key...');
         }
     }
 }
 
-// #5
+// #5 Running program :
+//Create key
 const key = new Key();
 
+//Create house
 const house = new MyHouse(key);
+
+//Create person with Key
 const person = new Person(key);
 
+//Open door using person's key
 house.openDoor(person.getKey());
 
+//Add person to the house
 house.comeIn(person);
+
+
+export {}
